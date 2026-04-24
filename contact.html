@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Need a Reed Indeed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Dancing Script"', 'cursive'],
+            heading: ['"Cormorant Garamond"', 'serif'],
+            body: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#e8527a; --pink:#ff8fab; --blush:#ffb3c6; --coral:#ff8c69;
+      --peach:#ffab91; --gold:#f4c430; --cream:#fff8f5; --text:#3d2a2a;
+      --spring:cubic-bezier(0.34,1.56,0.64,1);
+    }
+    body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text); }
+    .grad-bg {
+      background:linear-gradient(-45deg,#ff8fab,#ffb3c6,#ffcba4,#ffd700,#ff6b9d,#ffab91);
+      background-size:400% 400%; animation:gradientShift 20s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+    }
+    .font-display{font-family:'Dancing Script',cursive;}
+    .font-heading{font-family:'Cormorant Garamond',serif;}
+    .nav-link{font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);position:relative;padding-bottom:2px;transition:color 0.2s;}
+    .nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--rose);transition:width 0.25s var(--spring);}
+    .nav-link:hover{color:var(--rose);} .nav-link:hover::after{width:100%;}
+    .nav-link.active{color:var(--rose);} .nav-link.active::after{width:100%;}
+    .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--rose),var(--coral));color:white;font-weight:800;font-size:0.9rem;letter-spacing:0.05em;padding:14px 32px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(232,82,122,0.35);transition:transform 0.2s var(--spring),box-shadow 0.2s;}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 32px rgba(232,82,122,0.45);}
+    .btn-primary:active{transform:translateY(0) scale(0.98);}
+    .btn-primary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+    .card{background:white;border-radius:20px;box-shadow:0 4px 0 0 rgba(232,82,122,0.08),0 8px 32px rgba(232,82,122,0.06);transition:transform 0.25s var(--spring),box-shadow 0.25s;overflow:hidden;}
+    .card:hover{transform:translateY(-6px);box-shadow:0 8px 0 0 rgba(232,82,122,0.12),0 16px 48px rgba(232,82,122,0.12);}
+    .form-field{width:100%;font-family:'Nunito',sans-serif;font-size:0.95rem;padding:14px 18px;border-radius:14px;border:2px solid var(--blush);background:white;color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+    .form-field:focus{border-color:var(--rose);box-shadow:0 0 0 4px rgba(232,82,122,0.1);}
+    .form-label{display:block;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--rose);margin-bottom:6px;}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="font-display text-2xl leading-none" style="color:var(--rose)">Need a Reed Indeed</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html"  class="nav-link">Gallery</a>
+      <a href="about.html"    class="nav-link">About</a>
+      <a href="contact.html"  class="btn-primary text-sm py-3 px-6">Get in Touch</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus-visible:outline-none" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-xl" style="color:var(--rose)"></i>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-pink-100 px-6 py-5 flex flex-col gap-4">
+    <a href="index.html"    class="nav-link text-base">Home</a>
+    <a href="services.html" class="nav-link text-base">Services</a>
+    <a href="gallery.html"  class="nav-link text-base">Gallery</a>
+    <a href="about.html"    class="nav-link text-base">About</a>
+    <a href="contact.html"  class="btn-primary text-center mt-2">Get in Touch</a>
+  </div>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === location.href || location.pathname.endsWith(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</nav>
+
+<!-- HERO -->
+<section class="grad-bg py-20 text-center">
+  <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-3" style="color:white; opacity:0.85;">Let's Connect</p>
+  <h1 class="font-display text-5xl md:text-6xl" style="color:white; text-shadow:0 2px 12px rgba(60,20,20,0.18);">Get in Touch</h1>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="max-w-5xl mx-auto px-6 py-16">
+  <div class="grid md:grid-cols-2 gap-16 items-start">
+
+    <!-- LEFT: FORM -->
+    <div>
+      <h2 class="font-heading text-3xl font-semibold mb-3" style="color:var(--rose);">Request a Consultation</h2>
+      <p class="font-body text-sm leading-relaxed mb-8" style="opacity:0.7;">Fill out the form below and we'll get back to you within 24–48 hours to discuss your project and schedule your free in-home or virtual consultation.</p>
+
+      <!-- Success message -->
+      <div id="form-success" class="hidden rounded-2xl p-6 mb-6" style="background:#f0fdf4; border:2px solid #86efac;">
+        <div class="flex items-start gap-4">
+          <i class="fa-solid fa-circle-check text-2xl mt-0.5" style="color:#16a34a;"></i>
+          <div>
+            <h3 class="font-body font-extrabold text-base mb-1" style="color:#15803d;">Message Sent!</h3>
+            <p class="font-body text-sm" style="color:#166534;">Thank you for reaching out! We'll be in touch within 24–48 hours to discuss your project. We can't wait to help you get organized!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div id="form-error" class="hidden rounded-2xl p-6 mb-6" style="background:#fff0f4; border:2px solid var(--blush);">
+        <div class="flex items-start gap-4">
+          <i class="fa-solid fa-circle-exclamation text-2xl mt-0.5" style="color:var(--rose);"></i>
+          <div>
+            <h3 class="font-body font-extrabold text-base mb-1" style="color:var(--rose);">Something went wrong</h3>
+            <p class="font-body text-sm" style="color:var(--text); opacity:0.75;">The form couldn't be submitted. Please email us directly at <a href="mailto:reeddesmond22@gmail.com" style="color:var(--rose); font-weight:700;">reeddesmond22@gmail.com</a> or <a href="mailto:ebonyb540@gmail.com" style="color:var(--rose); font-weight:700;">ebonyb540@gmail.com</a> and we'll get back to you soon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inquiry Form -->
+      <form id="inquiry-form" action="YOUR_FORMSPREE_ENDPOINT" method="POST" class="flex flex-col gap-5">
+
+        <!-- Name -->
+        <div>
+          <label for="name" class="form-label">Your Name</label>
+          <input id="name" name="name" type="text" required placeholder="Jane Smith" class="form-field">
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label for="phone" class="form-label">Phone Number</label>
+          <input id="phone" name="phone" type="tel" placeholder="(323) 555-0100" class="form-field">
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="form-label">Email Address</label>
+          <input id="email" name="email" type="email" required placeholder="jane@example.com" class="form-field">
+        </div>
+
+        <!-- Space Type -->
+        <div>
+          <label for="space" class="form-label">Space to Organize</label>
+          <select id="space" name="space_type" class="form-field" style="appearance:none; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8527a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\"); background-repeat:no-repeat; background-position:right 18px center; padding-right:44px;">
+            <option value="" disabled selected>Select a space…</option>
+            <option value="Closet">Closet</option>
+            <option value="Pantry">Pantry</option>
+            <option value="Garage">Garage</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Bathroom">Bathroom</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Unique Project">Unique Project</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="form-label">Tell Us About Your Project</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Describe your space, goals, or any questions you have…" class="form-field" style="resize:vertical;"></textarea>
+        </div>
+
+        <!-- Hidden subject -->
+        <input type="hidden" name="_subject" value="New Organizing Inquiry — Need a Reed Indeed">
+
+        <!-- Submit -->
+        <button id="submit-btn" type="submit" class="btn-primary" style="width:100%;">
+          <i class="fa-solid fa-paper-plane mr-2"></i>Send Inquiry
+        </button>
+
+      </form>
+    </div>
+
+    <!-- RIGHT: CONTACT INFO -->
+    <div class="flex flex-col gap-6">
+
+      <!-- Contact Details Card -->
+      <div class="card p-8">
+        <h3 class="font-heading text-2xl font-semibold mb-6" style="color:var(--rose);">Contact Details</h3>
+        <div class="flex flex-col gap-5">
+          <a href="tel:3232120384" class="flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,var(--blush),var(--peach));">
+              <i class="fa-solid fa-phone text-sm" style="color:var(--rose);"></i>
+            </div>
+            <div>
+              <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-0.5" style="color:var(--rose); opacity:0.7;">Phone</p>
+              <p class="font-body font-semibold text-base group-hover:underline" style="color:var(--text);">(323) 212-0384</p>
+            </div>
+          </a>
+          <a href="mailto:reeddesmond22@gmail.com" class="flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,var(--blush),var(--peach));">
+              <i class="fa-solid fa-envelope text-sm" style="color:var(--rose);"></i>
+            </div>
+            <div>
+              <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-0.5" style="color:var(--rose); opacity:0.7;">Email</p>
+              <p class="font-body font-semibold text-base group-hover:underline break-all" style="color:var(--text);">reeddesmond22@gmail.com</p>
+            </div>
+          </a>
+          <a href="mailto:ebonyb540@gmail.com" class="flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,var(--blush),var(--peach));">
+              <i class="fa-solid fa-envelope text-sm" style="color:var(--rose);"></i>
+            </div>
+            <div>
+              <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-0.5" style="color:var(--rose); opacity:0.7;">Email</p>
+              <p class="font-body font-semibold text-base group-hover:underline break-all" style="color:var(--text);">ebonyb540@gmail.com</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Deposit Callout -->
+      <div class="rounded-2xl p-6" style="background:linear-gradient(135deg,#fff0f4,#ffe4ec); border:2px solid var(--blush);">
+        <div class="flex items-start gap-3">
+          <i class="fa-solid fa-circle-info text-lg mt-0.5 flex-shrink-0" style="color:var(--rose);"></i>
+          <div>
+            <h4 class="font-body font-extrabold text-sm mb-1" style="color:var(--rose);">Booking Deposit</h4>
+            <p class="font-body text-sm leading-relaxed" style="color:var(--text); opacity:0.8;">A 30% deposit is required to hold your project date. This ensures your spot on our calendar and allows us to prepare fully for your transformation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Response Time Card -->
+      <div class="card p-8">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,var(--rose),var(--coral));">
+            <i class="fa-solid fa-clock text-lg" style="color:white;"></i>
+          </div>
+          <div>
+            <h3 class="font-heading text-xl font-semibold mb-2" style="color:var(--rose);">Response Time</h3>
+            <p class="font-body text-sm leading-relaxed" style="opacity:0.75;">We typically respond to all inquiries within <strong style="color:var(--rose);">24–48 hours</strong>. For urgent requests, feel free to call or text us directly at <a href="tel:3232120384" style="color:var(--rose); font-weight:700;">(323) 212-0384</a>.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end right column -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#fff0f4; border-top:1px solid #ffd6e0;" class="py-14 mt-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+    <div>
+      <div class="font-display text-3xl mb-2" style="color:var(--rose)">Need a Reed Indeed</div>
+      <p class="text-sm" style="color:var(--text); opacity:0.65;">Professional Home Organizing</p>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Quick Links</h3>
+      <div class="flex flex-col gap-2 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="services.html" class="hover:opacity-100 transition-opacity">Services</a>
+        <a href="gallery.html"  class="hover:opacity-100 transition-opacity">Gallery</a>
+        <a href="about.html"    class="hover:opacity-100 transition-opacity">About</a>
+        <a href="contact.html"  class="hover:opacity-100 transition-opacity">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Contact Us</h3>
+      <div class="flex flex-col gap-3 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="tel:3232120384" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-phone" style="color:var(--rose)"></i> (323) 212-0384
+        </a>
+        <a href="mailto:reeddesmond22@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> reeddesmond22@gmail.com
+        </a>
+        <a href="mailto:ebonyb540@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> ebonyb540@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-pink-200 text-xs text-center" style="opacity:0.5;">
+    &copy; 2026 Need a Reed Indeed. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('inquiry-form');
+  const btn  = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('form-success').classList.remove('hidden');
+        document.getElementById('form-error').classList.add('hidden');
+        form.reset();
+        form.classList.add('hidden');
+      } else {
+        throw new Error('Non-OK response');
+      }
+    } catch {
+      document.getElementById('form-error').classList.remove('hidden');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i>Send Inquiry';
+    }
+  });
+</script>
+
+</body>
+</html>
