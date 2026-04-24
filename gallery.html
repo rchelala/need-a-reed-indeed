@@ -19,6 +19,7 @@
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -94,7 +95,7 @@
       <a href="about.html"    class="nav-link">About</a>
       <a href="contact.html"  class="btn-primary text-sm py-3 px-6">Get in Touch</a>
     </div>
-    <button id="menu-toggle" class="md:hidden focus-visible:outline-none" aria-label="Open menu">
+    <button id="menu-toggle" class="md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430]" aria-label="Open menu">
       <i class="fa-solid fa-bars text-xl" style="color:var(--rose)"></i>
     </button>
   </div>
@@ -128,13 +129,13 @@
 
   <!-- Filter Bar -->
   <div id="filter-bar" class="flex flex-wrap gap-3 justify-center mb-12">
-    <button class="filter-btn active" data-filter="all"      onclick="filterGallery('all')">All</button>
-    <button class="filter-btn"       data-filter="closets"   onclick="filterGallery('closets')">Closets</button>
-    <button class="filter-btn"       data-filter="pantries"  onclick="filterGallery('pantries')">Pantries</button>
-    <button class="filter-btn"       data-filter="garages"   onclick="filterGallery('garages')">Garages</button>
-    <button class="filter-btn"       data-filter="kitchens"  onclick="filterGallery('kitchens')">Kitchens</button>
-    <button class="filter-btn"       data-filter="bathrooms" onclick="filterGallery('bathrooms')">Bathrooms</button>
-    <button class="filter-btn"       data-filter="bedrooms"  onclick="filterGallery('bedrooms')">Bedrooms</button>
+    <button class="filter-btn active" data-filter="all"      aria-pressed="true"  onclick="filterGallery('all')">All</button>
+    <button class="filter-btn"        data-filter="closets"  aria-pressed="false" onclick="filterGallery('closets')">Closets</button>
+    <button class="filter-btn"        data-filter="pantries" aria-pressed="false" onclick="filterGallery('pantries')">Pantries</button>
+    <button class="filter-btn"        data-filter="garages"  aria-pressed="false" onclick="filterGallery('garages')">Garages</button>
+    <button class="filter-btn"        data-filter="kitchens" aria-pressed="false" onclick="filterGallery('kitchens')">Kitchens</button>
+    <button class="filter-btn"        data-filter="bathrooms" aria-pressed="false" onclick="filterGallery('bathrooms')">Bathrooms</button>
+    <button class="filter-btn"        data-filter="bedrooms" aria-pressed="false" onclick="filterGallery('bedrooms')">Bedrooms</button>
   </div>
 
   <!-- Gallery Grid -->
@@ -260,7 +261,9 @@
 <script>
   function filterGallery(type) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.filter === type);
+      const active = btn.dataset.filter === type;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
     document.querySelectorAll('#gallery-grid .gallery-item').forEach(item => {
       const show = type === 'all' || item.dataset.type === type;
