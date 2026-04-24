@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Need a Reed Indeed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Dancing Script"', 'cursive'],
+            heading: ['"Cormorant Garamond"', 'serif'],
+            body: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#e8527a; --pink:#ff8fab; --blush:#ffb3c6; --coral:#ff8c69;
+      --peach:#ffab91; --gold:#f4c430; --cream:#fff8f5; --text:#3d2a2a;
+      --spring:cubic-bezier(0.34,1.56,0.64,1);
+    }
+    body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text); }
+    .grad-bg {
+      background:linear-gradient(-45deg,#ff8fab,#ffb3c6,#ffcba4,#ffd700,#ff6b9d,#ffab91);
+      background-size:400% 400%; animation:gradientShift 20s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+    }
+    .font-display{font-family:'Dancing Script',cursive;}
+    .font-heading{font-family:'Cormorant Garamond',serif;}
+    .nav-link{font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);position:relative;padding-bottom:2px;transition:color 0.2s;}
+    .nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--rose);transition:width 0.25s var(--spring);}
+    .nav-link:hover{color:var(--rose);} .nav-link:hover::after{width:100%;}
+    .nav-link.active{color:var(--rose);} .nav-link.active::after{width:100%;}
+    .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--rose),var(--coral));color:white;font-weight:800;font-size:0.9rem;letter-spacing:0.05em;padding:14px 32px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(232,82,122,0.35);transition:transform 0.2s var(--spring),box-shadow 0.2s;}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 32px rgba(232,82,122,0.45);}
+    .btn-primary:active{transform:translateY(0) scale(0.98);}
+    .btn-primary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+    .card{background:white;border-radius:20px;box-shadow:0 4px 0 0 rgba(232,82,122,0.08),0 8px 32px rgba(232,82,122,0.06);transition:transform 0.25s var(--spring),box-shadow 0.25s;overflow:hidden;}
+    .card:hover{transform:translateY(-6px);box-shadow:0 8px 0 0 rgba(232,82,122,0.12),0 16px 48px rgba(232,82,122,0.12);}
+  </style>
+</head>
+<body>
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="font-display text-2xl leading-none" style="color:var(--rose)">Need a Reed Indeed</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html"  class="nav-link">Gallery</a>
+      <a href="about.html"    class="nav-link">About</a>
+      <a href="contact.html"  class="btn-primary text-sm py-3 px-6">Get in Touch</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus-visible:outline-none" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-xl" style="color:var(--rose)"></i>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-pink-100 px-6 py-5 flex flex-col gap-4">
+    <a href="index.html"    class="nav-link text-base">Home</a>
+    <a href="services.html" class="nav-link text-base">Services</a>
+    <a href="gallery.html"  class="nav-link text-base">Gallery</a>
+    <a href="about.html"    class="nav-link text-base">About</a>
+    <a href="contact.html"  class="btn-primary text-center mt-2">Get in Touch</a>
+  </div>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === location.href || location.pathname.endsWith(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</nav>
+
+<!-- Hero Banner -->
+<section class="grad-bg py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Our Story</p>
+    <h1 class="font-display text-5xl md:text-6xl leading-tight" style="color:var(--text)">About Us</h1>
+  </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="py-20 max-w-5xl mx-auto px-6">
+  <div class="grid md:grid-cols-2 gap-16 items-center">
+    <!-- Left: Story Content -->
+    <div>
+      <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-3" style="color:var(--rose)">How We Started</p>
+      <h2 class="font-heading text-4xl md:text-5xl font-semibold mb-6" style="color:var(--text)">Meet the Reeds</h2>
+
+      <p class="text-lg leading-relaxed mb-4" style="color:var(--text); opacity:0.85;">
+        [PLACEHOLDER TEXT: Replace this with your actual origin story. Share how you discovered your passion for organizing and what inspired you to start Need a Reed Indeed. Mention key moments, challenges overcome, or a turning point that shaped your business.]
+      </p>
+
+      <p class="text-lg leading-relaxed mb-4" style="color:var(--text); opacity:0.85;">
+        [PLACEHOLDER TEXT: Continue with details about your philosophy, approach, or what makes your organizing style unique. Talk about your clients, your values, or a specific project that defined your brand. This is where you tell the world who you are beyond the services you offer.]
+      </p>
+
+      <p class="text-lg leading-relaxed italic" style="color:var(--text); opacity:0.70;">
+        [Note: This is placeholder text. Please replace these paragraphs with your actual story, background, and the inspiration behind Need a Reed Indeed. Make it personal and authentic to connect with your clients.]
+      </p>
+    </div>
+
+    <!-- Right: Team Photo -->
+    <div>
+      <img src="https://placehold.co/500x625/ffb3c6/e8527a?text=The+Reed+Team" alt="The Reed Team" class="w-full rounded-3xl" style="aspect-ratio:4/5; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<!-- Mission Pillars Section -->
+<section style="background:#fff0f4;" class="py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-3" style="color:var(--rose)">Our Values</p>
+      <h2 class="font-heading text-4xl md:text-5xl font-semibold" style="color:var(--text)">What Sets Us Apart</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Card 1: Personalized -->
+      <div class="card p-8 text-center">
+        <i class="fa-solid fa-heart text-4xl mb-4" style="color:var(--rose)"></i>
+        <h3 class="font-heading text-2xl font-semibold mb-3" style="color:var(--text)">Personalized</h3>
+        <p style="color:var(--text); opacity:0.8;">Every home is different. We listen to how you live and design a system that works for you — not a generic template.</p>
+      </div>
+
+      <!-- Card 2: Reliable -->
+      <div class="card p-8 text-center">
+        <i class="fa-solid fa-shield-halved text-4xl mb-4" style="color:var(--rose)"></i>
+        <h3 class="font-heading text-2xl font-semibold mb-3" style="color:var(--text)">Reliable</h3>
+        <p style="color:var(--text); opacity:0.8;">We show up on time, communicate clearly, and deliver exactly what we promise. Your trust means everything to us.</p>
+      </div>
+
+      <!-- Card 3: Transformative -->
+      <div class="card p-8 text-center">
+        <i class="fa-solid fa-wand-magic-sparkles text-4xl mb-4" style="color:var(--rose)"></i>
+        <h3 class="font-heading text-2xl font-semibold mb-3" style="color:var(--text)">Transformative</h3>
+        <p style="color:var(--text); opacity:0.8;">We don't just tidy — we transform. The results are spaces you'll love coming home to, every single day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20">
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <i class="fa-solid fa-handshake text-5xl mb-6" style="color:var(--rose)"></i>
+    <h2 class="font-heading text-4xl md:text-5xl font-semibold mb-4" style="color:var(--text)">Let's Work Together</h2>
+    <p class="text-lg mb-8" style="color:var(--text); opacity:0.85;">Ready to transform your space? We require a 30% deposit to secure your project, with the balance due upon completion.</p>
+    <a href="contact.html" class="btn-primary">
+      <i class="fa-solid fa-paper-plane mr-2"></i>Get in Touch
+    </a>
+  </div>
+</section>
+
+<footer style="background:#fff0f4; border-top:1px solid #ffd6e0;" class="py-14 mt-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+    <div>
+      <div class="font-display text-3xl mb-2" style="color:var(--rose)">Need a Reed Indeed</div>
+      <p class="text-sm" style="color:var(--text); opacity:0.65;">Professional Home Organizing</p>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Quick Links</h3>
+      <div class="flex flex-col gap-2 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="services.html" class="hover:opacity-100 transition-opacity">Services</a>
+        <a href="gallery.html"  class="hover:opacity-100 transition-opacity">Gallery</a>
+        <a href="about.html"    class="hover:opacity-100 transition-opacity">About</a>
+        <a href="contact.html"  class="hover:opacity-100 transition-opacity">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Contact Us</h3>
+      <div class="flex flex-col gap-3 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="tel:3232120384" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-phone" style="color:var(--rose)"></i> (323) 212-0384
+        </a>
+        <a href="mailto:reeddesmond22@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> reeddesmond22@gmail.com
+        </a>
+        <a href="mailto:ebonyb540@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> ebonyb540@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-pink-200 text-xs text-center" style="opacity:0.5;">
+    &copy; 2026 Need a Reed Indeed. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
