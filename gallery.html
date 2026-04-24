@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Need a Reed Indeed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Dancing Script"', 'cursive'],
+            heading: ['"Cormorant Garamond"', 'serif'],
+            body: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#e8527a; --pink:#ff8fab; --blush:#ffb3c6; --coral:#ff8c69;
+      --peach:#ffab91; --gold:#f4c430; --cream:#fff8f5; --text:#3d2a2a;
+      --spring:cubic-bezier(0.34,1.56,0.64,1);
+    }
+    body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text); }
+    .grad-bg {
+      background:linear-gradient(-45deg,#ff8fab,#ffb3c6,#ffcba4,#ffd700,#ff6b9d,#ffab91);
+      background-size:400% 400%; animation:gradientShift 20s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+    }
+    .font-display{font-family:'Dancing Script',cursive;}
+    .font-heading{font-family:'Cormorant Garamond',serif;}
+    .nav-link{font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);position:relative;padding-bottom:2px;transition:color 0.2s;}
+    .nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--rose);transition:width 0.25s var(--spring);}
+    .nav-link:hover{color:var(--rose);} .nav-link:hover::after{width:100%;}
+    .nav-link.active{color:var(--rose);} .nav-link.active::after{width:100%;}
+    .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--rose),var(--coral));color:white;font-weight:800;font-size:0.9rem;letter-spacing:0.05em;padding:14px 32px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(232,82,122,0.35);transition:transform 0.2s var(--spring),box-shadow 0.2s;}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 32px rgba(232,82,122,0.45);}
+    .btn-primary:active{transform:translateY(0) scale(0.98);}
+    .btn-primary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+
+    /* Gallery-specific styles */
+    .filter-btn {
+      font-family:'Nunito',sans-serif; font-weight:800; font-size:0.78rem;
+      letter-spacing:0.06em; text-transform:uppercase;
+      padding:8px 20px; border-radius:50px; border:2px solid var(--blush);
+      background:white; color:var(--text); cursor:pointer;
+      transition:background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s var(--spring);
+    }
+    .filter-btn:hover { border-color:var(--rose); color:var(--rose); transform:translateY(-2px); }
+    .filter-btn.active { background:var(--rose); border-color:var(--rose); color:white; }
+    .filter-btn:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+
+    .gallery-grid { columns:1; column-gap:16px; }
+    @media(min-width:640px)  { .gallery-grid { columns:2; } }
+    @media(min-width:1024px) { .gallery-grid { columns:3; } }
+
+    .gallery-item {
+      break-inside:avoid; margin-bottom:16px;
+      position:relative; border-radius:16px; overflow:hidden; cursor:pointer;
+    }
+    .gallery-item img { display:block; width:100%; border-radius:16px; }
+    .gallery-overlay {
+      position:absolute; inset:0; border-radius:16px;
+      background:linear-gradient(to top,rgba(232,82,122,0.75) 0%,transparent 50%);
+      opacity:0; transition:opacity 0.3s;
+      display:flex; align-items:flex-end; padding:16px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity:1; }
+    .gallery-overlay span {
+      font-family:'Nunito',sans-serif; font-weight:800; font-size:0.8rem;
+      letter-spacing:0.08em; text-transform:uppercase; color:white;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="font-display text-2xl leading-none" style="color:var(--rose)">Need a Reed Indeed</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html"  class="nav-link">Gallery</a>
+      <a href="about.html"    class="nav-link">About</a>
+      <a href="contact.html"  class="btn-primary text-sm py-3 px-6">Get in Touch</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus-visible:outline-none" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-xl" style="color:var(--rose)"></i>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-pink-100 px-6 py-5 flex flex-col gap-4">
+    <a href="index.html"    class="nav-link text-base">Home</a>
+    <a href="services.html" class="nav-link text-base">Services</a>
+    <a href="gallery.html"  class="nav-link text-base">Gallery</a>
+    <a href="about.html"    class="nav-link text-base">About</a>
+    <a href="contact.html"  class="btn-primary text-center mt-2">Get in Touch</a>
+  </div>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === location.href || location.pathname.endsWith(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</nav>
+
+<!-- Hero -->
+<section class="grad-bg py-20 text-center">
+  <p class="font-body font-extrabold text-xs uppercase tracking-widest mb-3" style="color:rgba(255,255,255,0.85)">Before &amp; After</p>
+  <h1 class="font-display text-5xl md:text-6xl text-white drop-shadow">Our Work</h1>
+</section>
+
+<!-- Main Content -->
+<main class="max-w-6xl mx-auto px-6 py-16">
+
+  <!-- Filter Bar -->
+  <div id="filter-bar" class="flex flex-wrap gap-3 justify-center mb-12">
+    <button class="filter-btn active" data-filter="all"      onclick="filterGallery('all')">All</button>
+    <button class="filter-btn"       data-filter="closets"   onclick="filterGallery('closets')">Closets</button>
+    <button class="filter-btn"       data-filter="pantries"  onclick="filterGallery('pantries')">Pantries</button>
+    <button class="filter-btn"       data-filter="garages"   onclick="filterGallery('garages')">Garages</button>
+    <button class="filter-btn"       data-filter="kitchens"  onclick="filterGallery('kitchens')">Kitchens</button>
+    <button class="filter-btn"       data-filter="bathrooms" onclick="filterGallery('bathrooms')">Bathrooms</button>
+    <button class="filter-btn"       data-filter="bedrooms"  onclick="filterGallery('bedrooms')">Bedrooms</button>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div id="gallery-grid" class="gallery-grid">
+
+    <!-- Closet 1 -->
+    <div class="gallery-item" data-type="closets">
+      <img src="https://placehold.co/600x750/ffb3c6/e8527a" alt="Closet organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-shirt mr-2"></i>Closets</span>
+      </div>
+    </div>
+
+    <!-- Pantry 1 -->
+    <div class="gallery-item" data-type="pantries">
+      <img src="https://placehold.co/600x500/ffcba4/e8527a" alt="Pantry organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-jar mr-2"></i>Pantries</span>
+      </div>
+    </div>
+
+    <!-- Garage 1 -->
+    <div class="gallery-item" data-type="garages">
+      <img src="https://placehold.co/600x600/ffd6e0/e8527a" alt="Garage organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-car mr-2"></i>Garages</span>
+      </div>
+    </div>
+
+    <!-- Kitchen -->
+    <div class="gallery-item" data-type="kitchens">
+      <img src="https://placehold.co/600x480/ffab91/e8527a" alt="Kitchen organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-kitchen-set mr-2"></i>Kitchens</span>
+      </div>
+    </div>
+
+    <!-- Bedroom -->
+    <div class="gallery-item" data-type="bedrooms">
+      <img src="https://placehold.co/600x700/ffd6e0/e8527a" alt="Bedroom organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-bed mr-2"></i>Bedrooms</span>
+      </div>
+    </div>
+
+    <!-- Bathroom -->
+    <div class="gallery-item" data-type="bathrooms">
+      <img src="https://placehold.co/600x550/ffb3c6/e8527a" alt="Bathroom organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-bath mr-2"></i>Bathrooms</span>
+      </div>
+    </div>
+
+    <!-- Closet 2 -->
+    <div class="gallery-item" data-type="closets">
+      <img src="https://placehold.co/600x600/ffcba4/e8527a" alt="Closet organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-shirt mr-2"></i>Closets</span>
+      </div>
+    </div>
+
+    <!-- Pantry 2 -->
+    <div class="gallery-item" data-type="pantries">
+      <img src="https://placehold.co/600x720/ffd6e0/e8527a" alt="Pantry organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-jar mr-2"></i>Pantries</span>
+      </div>
+    </div>
+
+    <!-- Garage 2 -->
+    <div class="gallery-item" data-type="garages">
+      <img src="https://placehold.co/600x500/ffab91/e8527a" alt="Garage organization">
+      <div class="gallery-overlay">
+        <span><i class="fa-solid fa-car mr-2"></i>Garages</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Caption -->
+  <p class="text-center text-sm mt-4" style="opacity:0.55;">
+    <i class="fa-solid fa-camera mr-1" style="color:var(--rose)"></i>
+    Real client photos coming soon — these are placeholders.
+  </p>
+
+</main>
+
+<footer style="background:#fff0f4; border-top:1px solid #ffd6e0;" class="py-14 mt-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+    <div>
+      <div class="font-display text-3xl mb-2" style="color:var(--rose)">Need a Reed Indeed</div>
+      <p class="text-sm" style="color:var(--text); opacity:0.65;">Professional Home Organizing</p>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Quick Links</h3>
+      <div class="flex flex-col gap-2 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="services.html" class="hover:opacity-100 transition-opacity">Services</a>
+        <a href="gallery.html"  class="hover:opacity-100 transition-opacity">Gallery</a>
+        <a href="about.html"    class="hover:opacity-100 transition-opacity">About</a>
+        <a href="contact.html"  class="hover:opacity-100 transition-opacity">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Contact Us</h3>
+      <div class="flex flex-col gap-3 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="tel:3232120384" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-phone" style="color:var(--rose)"></i> (323) 212-0384
+        </a>
+        <a href="mailto:reeddesmond22@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> reeddesmond22@gmail.com
+        </a>
+        <a href="mailto:ebonyb540@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> ebonyb540@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-pink-200 text-xs text-center" style="opacity:0.5;">
+    &copy; 2026 Need a Reed Indeed. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  function filterGallery(type) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === type);
+    });
+    document.querySelectorAll('#gallery-grid .gallery-item').forEach(item => {
+      const show = type === 'all' || item.dataset.type === type;
+      item.style.display = show ? 'block' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
