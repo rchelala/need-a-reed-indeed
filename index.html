@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — Need a Reed Indeed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Dancing Script"', 'cursive'],
+            heading: ['"Cormorant Garamond"', 'serif'],
+            body: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:    #e8527a;
+      --pink:    #ff8fab;
+      --blush:   #ffb3c6;
+      --coral:   #ff8c69;
+      --peach:   #ffab91;
+      --gold:    #f4c430;
+      --cream:   #fff8f5;
+      --text:    #3d2a2a;
+      --spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); }
+    .grad-bg {
+      background: linear-gradient(-45deg, #ff8fab, #ffb3c6, #ffcba4, #ffd700, #ff6b9d, #ffab91);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .font-display  { font-family: 'Dancing Script', cursive; }
+    .font-heading  { font-family: 'Cormorant Garamond', serif; }
+    .nav-link {
+      font-weight: 700; font-size: 0.85rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text);
+      position: relative; padding-bottom: 2px; transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--rose);
+      transition: width 0.25s var(--spring);
+    }
+    .nav-link:hover { color: var(--rose); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--rose); }
+    .nav-link.active::after { width: 100%; }
+    .btn-primary {
+      display: inline-block; background: linear-gradient(135deg, var(--rose), var(--coral));
+      color: white; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.05em;
+      padding: 14px 32px; border-radius: 50px; border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(232,82,122,0.35);
+      transition: transform 0.2s var(--spring), box-shadow 0.2s;
+    }
+    .btn-primary:hover  { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 32px rgba(232,82,122,0.45); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+    .btn-primary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .btn-outline {
+      display: inline-block; background: transparent;
+      color: var(--rose); font-weight: 800; font-size: 0.9rem;
+      padding: 12px 30px; border-radius: 50px; border: 2px solid var(--rose);
+      cursor: pointer; transition: background 0.2s, color 0.2s, transform 0.2s var(--spring);
+    }
+    .btn-outline:hover  { background: var(--rose); color: white; transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .card {
+      background: white; border-radius: 20px;
+      box-shadow: 0 4px 0 0 rgba(232,82,122,0.08), 0 8px 32px rgba(232,82,122,0.06);
+      transition: transform 0.25s var(--spring), box-shadow 0.25s;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 0 0 rgba(232,82,122,0.12), 0 16px 48px rgba(232,82,122,0.12);
+    }
+
+    /* Hero staggered fade-up animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.6s ease forwards; animation-delay: 0.1s; opacity: 0; }
+    .hero-heading { animation: fadeUp 0.7s ease forwards; animation-delay: 0.3s; opacity: 0; }
+    .hero-sub     { animation: fadeUp 0.7s ease forwards; animation-delay: 0.5s; opacity: 0; }
+    .hero-cta     { animation: fadeUp 0.7s ease forwards; animation-delay: 0.7s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="font-display text-2xl leading-none" style="color:var(--rose)">Need a Reed Indeed</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html"  class="nav-link">Gallery</a>
+      <a href="about.html"    class="nav-link">About</a>
+      <a href="contact.html"  class="btn-primary text-sm py-3 px-6">Get in Touch</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus-visible:outline-none" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-xl" style="color:var(--rose)"></i>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-pink-100 px-6 py-5 flex flex-col gap-4">
+    <a href="index.html"    class="nav-link text-base">Home</a>
+    <a href="services.html" class="nav-link text-base">Services</a>
+    <a href="gallery.html"  class="nav-link text-base">Gallery</a>
+    <a href="about.html"    class="nav-link text-base">About</a>
+    <a href="contact.html"  class="btn-primary text-center mt-2">Get in Touch</a>
+  </div>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === location.href || location.pathname.endsWith(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</nav>
+
+<!-- HERO -->
+<section class="grad-bg flex items-center justify-center text-center px-6" style="min-height:88vh;">
+  <div class="max-w-3xl mx-auto">
+    <p class="hero-eyebrow inline-block text-xs font-extrabold uppercase tracking-widest text-white bg-white/20 rounded-full px-5 py-2 mb-6">
+      Professional Home Organizing
+    </p>
+    <h1 class="hero-heading font-display text-5xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight"
+        style="text-shadow: 0 2px 24px rgba(0,0,0,0.18);">
+      Your Space, Beautifully Organized
+    </h1>
+    <p class="hero-sub text-lg sm:text-xl text-white/90 mb-10 max-w-xl mx-auto leading-relaxed">
+      We turn cluttered spaces into calm, functional homes — so you can focus on what matters most. From closets to garages, we do it all with care.
+    </p>
+    <div class="hero-cta flex flex-wrap items-center justify-center gap-4">
+      <a href="contact.html" class="btn-primary">
+        <i class="fa-solid fa-sparkles mr-2"></i>Get Organized Today
+      </a>
+      <a href="services.html"
+         class="btn-outline"
+         style="border-color:white; color:white;">
+        View Our Services
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <p class="text-xs font-extrabold uppercase tracking-widest mb-3" style="color:var(--gold);">What We Do</p>
+      <h2 class="font-heading text-4xl sm:text-5xl font-semibold" style="color:var(--text);">Our Services</h2>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Closets -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-shirt text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Closets</h3>
+        <p class="text-sm leading-relaxed opacity-70">Maximize every inch of your wardrobe space with smart systems, folding techniques, and a layout you'll love opening every morning.</p>
+      </div>
+
+      <!-- Pantries -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-jar text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Pantries</h3>
+        <p class="text-sm leading-relaxed opacity-70">From cereal boxes to spice racks, we create a pantry that's easy to navigate, shop from, and keep tidy long-term.</p>
+      </div>
+
+      <!-- Garages -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-car text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Garages</h3>
+        <p class="text-sm leading-relaxed opacity-70">Reclaim your garage — tools, sports gear, seasonal items, and more, all organized into a system that actually makes sense.</p>
+      </div>
+
+      <!-- Kitchens -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-kitchen-set text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Kitchens</h3>
+        <p class="text-sm leading-relaxed opacity-70">Streamline your cooking space with drawer inserts, cabinet organization, and a layout built around how you actually cook.</p>
+      </div>
+
+      <!-- Bathrooms -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-bath text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Bathrooms</h3>
+        <p class="text-sm leading-relaxed opacity-70">Clear the clutter from countertops, under-sink cabinets, and linen closets so your morning routine flows effortlessly.</p>
+      </div>
+
+      <!-- Bedrooms -->
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-bed text-2xl" style="color:var(--rose);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Bedrooms</h3>
+        <p class="text-sm leading-relaxed opacity-70">Create a restful sanctuary with organized nightstands, under-bed storage solutions, and a clutter-free environment for better sleep.</p>
+      </div>
+
+      <!-- Unique Projects — spans 2 cols on sm, 1 on lg -->
+      <div class="card p-7 sm:col-span-2 lg:col-span-1">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:var(--cream);">
+          <i class="fa-solid fa-star text-2xl" style="color:var(--gold);"></i>
+        </div>
+        <h3 class="font-heading text-2xl font-semibold mb-2">Unique Projects</h3>
+        <p class="text-sm leading-relaxed opacity-70">Have a space that doesn't fit a category? We love a challenge. From home offices to craft rooms to storage units — bring us your toughest organizational puzzle.</p>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <a href="services.html" class="btn-outline">See All Services &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY TEASER -->
+<section class="py-24 px-6" style="background:#fff0f4;">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <p class="text-xs font-extrabold uppercase tracking-widest mb-3" style="color:var(--gold);">Before &amp; After</p>
+      <h2 class="font-heading text-4xl sm:text-5xl font-semibold" style="color:var(--text);">Our Work</h2>
+    </div>
+
+    <!-- Images row -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+      <div class="overflow-hidden rounded-2xl shadow-md">
+        <img src="https://placehold.co/600x450/ffb3c6/3d2a2a?text=Before+%26+After"
+             alt="Organized closet before and after"
+             class="w-full h-full object-cover aspect-[4/3] transition-transform duration-500 hover:scale-105">
+      </div>
+      <div class="overflow-hidden rounded-2xl shadow-md">
+        <img src="https://placehold.co/600x450/ffcba4/3d2a2a?text=Before+%26+After"
+             alt="Organized pantry before and after"
+             class="w-full h-full object-cover aspect-[4/3] transition-transform duration-500 hover:scale-105">
+      </div>
+      <div class="overflow-hidden rounded-2xl shadow-md">
+        <img src="https://placehold.co/600x450/ff8fab/3d2a2a?text=Before+%26+After"
+             alt="Organized garage before and after"
+             class="w-full h-full object-cover aspect-[4/3] transition-transform duration-500 hover:scale-105">
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a href="gallery.html" class="btn-primary">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="grad-bg py-24 px-6 text-center">
+  <div class="max-w-2xl mx-auto">
+    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-6">
+      <i class="fa-solid fa-wand-magic-sparkles text-2xl text-white"></i>
+    </div>
+    <h2 class="font-display text-4xl sm:text-5xl text-white mb-5" style="text-shadow: 0 2px 16px rgba(0,0,0,0.15);">
+      Ready to Transform Your Space?
+    </h2>
+    <p class="text-white/90 text-lg mb-10 leading-relaxed">
+      Getting started is simple. We'll walk through your space, build a custom plan, and get to work. Just a 30% deposit gets your project on the calendar — the rest is paid at completion.
+    </p>
+    <a href="contact.html" class="btn-primary" style="background:white; color:var(--rose); box-shadow:0 6px 24px rgba(0,0,0,0.15);">
+      Request a Consultation
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#fff0f4; border-top:1px solid #ffd6e0;" class="py-14 mt-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+    <div>
+      <div class="font-display text-3xl mb-2" style="color:var(--rose)">Need a Reed Indeed</div>
+      <p class="text-sm" style="color:var(--text); opacity:0.65;">Professional Home Organizing</p>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Quick Links</h3>
+      <div class="flex flex-col gap-2 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="services.html" class="hover:opacity-100 transition-opacity">Services</a>
+        <a href="gallery.html"  class="hover:opacity-100 transition-opacity">Gallery</a>
+        <a href="about.html"    class="hover:opacity-100 transition-opacity">About</a>
+        <a href="contact.html"  class="hover:opacity-100 transition-opacity">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-body font-extrabold text-xs uppercase tracking-widest mb-4" style="color:var(--rose)">Contact Us</h3>
+      <div class="flex flex-col gap-3 text-sm" style="color:var(--text); opacity:0.8;">
+        <a href="tel:3232120384" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-phone" style="color:var(--rose)"></i> (323) 212-0384
+        </a>
+        <a href="mailto:reeddesmond22@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> reeddesmond22@gmail.com
+        </a>
+        <a href="mailto:ebonyb540@gmail.com" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
+          <i class="fa-solid fa-envelope" style="color:var(--rose)"></i> ebonyb540@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-pink-200 text-xs text-center" style="opacity:0.5;">
+    &copy; 2026 Need a Reed Indeed. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
